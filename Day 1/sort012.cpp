@@ -11,35 +11,40 @@ using ll = long long;
 using namespace std;
 using ll = long long;
 
-void setZeroes(vector<vector<int>>& matrix) {
 
-	int j_size = matrix.size();
-	int i_size = matrix[0].size();
 
-	vector<int, int> myVec;
+void sortColors(vector<int>& nums) {
 
-	rep (i, i_size)
+	int low = 0;
+	int mid = 0;
+	int high = nums.size() - 1;
+
+	while (mid <= high)
 	{
-		rep (j, j_size)
+		if (nums[mid] == 0)
 		{
-			if (matrix[i][j] == 0)
-			{
-				myVec.push_back({i, j});
-			}
+			swap(nums[low] , nums[mid]);
+			low++;
+			mid++;
+		}
+		else if (nums[mid] == 1)
+		{
+			mid++;
+		}
+		else
+		{
+			swap(nums[mid] , nums[high]);
+			high--;
 		}
 	}
 
-	for (auto it : myVec)
+	cout << low << mid << high << endl;
+
+
+	for (auto it : nums)
 	{
-		int x = it.first;
-		int y = it.second;
-
-		rep(i, i_size)
-		{
-
-		}
+		cout << it << " ";
 	}
-
 
 
 }
@@ -51,8 +56,10 @@ int main()
 	cin.tie(0);
 	cout.tie(0);
 
-	vector<vector<int>> matrix = {{0, 1, 2, 0} , {3, 4, 5, 2} , {1, 3, 1, 5}};
-	setZeroes(matrix);
+	vector<int> nums = {2, 0, 2, 1, 1, 0, 0, 0, 1};
+
+	sortColors(nums);
+
 
 
 }
