@@ -29,9 +29,9 @@ struct TreeNode
 void InorderTraversalRecursion(TreeNode *root)
 {
 	if (root == NULL) return;
-
-	cout << root -> data << " ";
 	InorderTraversalRecursion(root->left);
+	cout << root -> data << " ";
+
 	InorderTraversalRecursion(root->right);
 
 }
@@ -90,6 +90,52 @@ vector<vector<int>> levelOrderTraversal(TreeNode *root)
 	return ans;
 }
 
+vector<int> InorderIterative(TreeNode *root)
+{
+	stack<TreeNode *> st;
+	// st.push(root);
+	TreeNode *node = root;
+	vector<int> ans;
+
+	while (true)
+	{
+		if (node != NULL)
+		{
+			st.push(node);
+			node = node->left;
+		}
+
+		else
+		{
+			if (st.empty() == true) { break; }
+			node = st.top();
+			st.pop();
+			ans.push_back(node->data);
+			node = node->right;
+		}
+
+		// if (node != NULL)
+		// {
+		// 	st.push(node);
+		// 	node = node->left;
+		// }
+		// else
+		// {
+		// 	if (st.empty() == true) { break; }
+		// 	node = st.top();
+		// 	st.pop();
+		// 	ans.push_back(node->data);
+		// 	node = node->right;
+		// }
+	}
+
+	return ans;
+}
+
+
+
+
+
 int main()
 {
 	ios::sync_with_stdio(0);
@@ -97,32 +143,38 @@ int main()
 	cout.tie(0);
 
 
-	TreeNode *root = new TreeNode(3);
-	root->left = new TreeNode(11);
-	root->right = new TreeNode(9);
+	TreeNode *root = new TreeNode(1);
+	root->left = new TreeNode(2);
+	root->right = new TreeNode(3);
 
 	TreeNode *root1 = root->left;
 	TreeNode *root2 = root->right;
 
 	root1->left = new TreeNode(4);
-	root1->right = new TreeNode(89);
-	root1->right->left = new TreeNode(100);
+	root1->right = new TreeNode(5);
+	root1->right->left = new TreeNode(6);
 
-	root2->left = new TreeNode(542);
+	root2->left = new TreeNode(7);
 
 
-	// InorderTraversalRecursion(root);
+	InorderTraversalRecursion(root);
+	cout << endl;
 	// PreorderIterator(root);
 
-	vector<vector<int>> levelOrdrerVector =  levelOrderTraversal(root);
-	for (auto it : levelOrdrerVector)
-	{
-		for (auto it1 : it)
-		{
-			cout << it1 << " ";
-		}
-		cout << endl;
-	}
+	// vector<vector<int>> levelOrdrerVector =  levelOrderTraversal(root);
+	// for (auto it : levelOrdrerVector)
+	// {
+	// 	for (auto it1 : it)
+	// 	{
+	// 		cout << it1 << " ";
+	// 	}
+	// 	cout << endl;
+	// }
+
+	vector<int> print =  InorderIterative(root);
+
+	for (auto it : print) cout << it << " ";
+	cout << endl;
 
 
 
