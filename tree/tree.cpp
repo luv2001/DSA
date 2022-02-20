@@ -133,7 +133,67 @@ vector<int> InorderIterative(TreeNode *root)
 }
 
 
+vector<int> PostOrder2Stack(TreeNode *root)
+{
+	stack<TreeNode *> st1;
+	st1.push(root);
+	vector<int> ans;
+	TreeNode *node;
 
+	while (!st1.empty())
+	{
+		node = st1.top();
+		ans.push_back(node->data);
+		st1.pop();
+		if (node->left) st1.push(node->left);
+		if (node->right) st1.push(node->right);
+
+	}
+
+	reverse(ans.begin(), ans.end());
+	return ans;
+
+}
+
+
+vector<int> PostOrder1Stack(TreeNode *root)
+{
+	stack<TreeNode *> st;
+	TreeNode *curl = root;
+	TreeNode *temp;
+
+	vector<int> ans;
+
+	while (!st.empty() || curl != NULL)
+	{
+		if (curl != NULL)
+		{
+			st.push(curl);
+			curl = curl -> left;
+		}
+		else
+		{
+			temp = st.top() -> right;
+
+			if (temp == NULL)
+			{
+				temp = st.top();
+				st.pop();
+				ans.push_back(temp->data);
+
+				while (!st.empty() && st.top()->right == temp)
+				{
+					temp = st.top();
+					st.pop();
+					ans.push_back(temp->data);
+				}
+			}
+			else curl = temp;
+		}
+	}
+
+	return ans;
+}
 
 
 int main()
@@ -157,8 +217,8 @@ int main()
 	root2->left = new TreeNode(7);
 
 
-	InorderTraversalRecursion(root);
-	cout << endl;
+	// InorderTraversalRecursion(root);
+	// cout << endl;
 	// PreorderIterator(root);
 
 	// vector<vector<int>> levelOrdrerVector =  levelOrderTraversal(root);
@@ -171,10 +231,22 @@ int main()
 	// 	cout << endl;
 	// }
 
-	vector<int> print =  InorderIterative(root);
+	// vector<int> print =  InorderIterative(root);
+
+	// for (auto it : print) cout << it << " ";
+	// cout << endl;
+
+	vector<int> print =  PostOrder2Stack(root);
 
 	for (auto it : print) cout << it << " ";
 	cout << endl;
+
+	vector<int> post2 = PostOrder1Stack(root);
+
+	for (auto it : post2) cout << it << " ";
+	cout << endl;
+
+
 
 
 
