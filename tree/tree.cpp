@@ -11,6 +11,7 @@ using ll = long long;
 using namespace std;
 using ll = long long;
 
+// This contain striver video 1-13
 
 struct TreeNode
 {
@@ -236,15 +237,15 @@ int main()
 	// for (auto it : print) cout << it << " ";
 	// cout << endl;
 
-	vector<int> print =  PostOrder2Stack(root);
+	// vector<int> print =  PostOrder2Stack(root);
 
-	for (auto it : print) cout << it << " ";
-	cout << endl;
+	// for (auto it : print) cout << it << " ";
+	// cout << endl;
 
-	vector<int> post2 = PostOrder1Stack(root);
+	// vector<int> post2 = PostOrder1Stack(root);
 
-	for (auto it : post2) cout << it << " ";
-	cout << endl;
+	// for (auto it : post2) cout << it << " ";
+	// cout << endl;
 
 
 
