@@ -26,34 +26,59 @@ struct TreeNode
 
 };
 
-int heightTree(TreeNode *root)
+// int heightTree(TreeNode *root)
+// {
+// 	if (root == NULL) return 0;
+// 	else
+// 	{
+// 		return  1 + max(heightTree(root->left), heightTree(root->right));
+// 	}
+// }
+
+// bool isBalanced(TreeNode* root) {
+
+// 	if (root == NULL) return true;
+// 	else
+// 	{
+// 		int height_left = heightTree(root->left);
+// 		int height_right = heightTree(root->right);
+
+// 		int difference = max(height_right, height_left) - min(height_right, height_left);
+// 		if (difference == 1)
+// 		{
+// 			return (isBalanced(root->left) & isBalanced(root->right));
+// 		}
+// 		else
+// 		{
+// 			return false;
+// 		}
+// 	}
+
+// }
+
+int dfsHeight(TreeNode *root)
 {
 	if (root == NULL) return 0;
 	else
 	{
-		return  1 + max(heightTree(root->left), heightTree(root->right));
+		int lh, rh;
+
+		lh = dfsHeight(root->left);
+		if (lh == -1) return -1;
+
+		rh = dfsHeight(root->right);
+		if (rh == -1) return -1;
+
+		if (abs(lh - rh) > 1) return -1;
+
+		else
+			return 1 + max( lh, rh);
 	}
 }
 
-bool isBalanced(TreeNode* root) {
-
-	if (root == NULL) return true;
-	else
-	{
-		int height_left = heightTree(root->left);
-		int height_right = heightTree(root->right);
-
-		int difference = max(height_right, height_left) - min(height_right, height_left);
-		if (difference == 1)
-		{
-			return (isBalanced(root->left) & isBalanced(root->right));
-		}
-		else
-		{
-			return false;
-		}
-	}
-
+bool isBalanced(TreeNode* root)
+{
+	return dfsHeight(root) != -1;
 }
 
 int main()
@@ -74,6 +99,8 @@ int main()
 	root1->right->left = new TreeNode(6);
 
 	root2->left = new TreeNode(7);
+	root2->left->left = new TreeNode(2);
+	root2->left->left->left = new TreeNode(2);
 
 	cout << isBalanced(root) << endl;
 
