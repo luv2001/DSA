@@ -1,0 +1,17 @@
+Some questions to practice on Binary Search :
+
+First and Last Occurrence
+Find element in rotated sorted array
+Search in a nearly sorted array
+Next Letter
+Find Kth Missing Positive Number
+Find Peak Element :
+Implement Pow(x)
+Some good question on binary Search:
+
+Allocate min number of pages.
+Capacity to ship packages with d days
+Split largest Array
+Koko eating banana
+Median in two sorted array
+Max profit in job scheduling.

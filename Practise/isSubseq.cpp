@@ -12,29 +12,48 @@ using ll = long long;
 using namespace std;
 using ll = long long;
 
-/*
+bool isSubsequence(string s, string t) {
 
-*/
+	int n = s.length();
+	int m = t.length();
 
-struct TreeNode
-{
-	int data;
-	struct TreeNode* left;
-	struct TreeNode* right;
+	int pt1 = 0;
+	int pt2 = 0;
 
-	TreeNode(int val)
+
+	while (pt2 < m)
 	{
-		data = val;
-		left = right = NULL;
+		if (s[pt1] == t[pt2])
+		{
+			pt1++;
+			pt2++;
+		}
+		else
+		{
+			pt2++;
+		}
 	}
 
-};
+
+
+	if (pt1 == n )
+	{
+		return true;
+	} else return false;
+
+}
 
 int main()
 {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
+
+	string s = "xyz";
+	string t = "sasxhbhdjzyhbajh";
+
+
+	cout << isSubsequence(s, t) << endl;
 
 
 }

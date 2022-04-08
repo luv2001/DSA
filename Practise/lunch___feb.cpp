@@ -5,36 +5,23 @@
 #define rep(i,n) for(int i=0;i<(n);++i)
 #define repA(i,a,n) for(int i=a;i<=(n);++i)
 #define repD(i,a,n) for(int i=a;i>=(n);--i)
-#define push_back pb
 using ll = long long;
 
 
 using namespace std;
 using ll = long long;
 
-/*
-
-*/
-
-struct TreeNode
-{
-	int data;
-	struct TreeNode* left;
-	struct TreeNode* right;
-
-	TreeNode(int val)
-	{
-		data = val;
-		left = right = NULL;
-	}
-
-};
 
 int main()
 {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
+
+	ll d;
+	cin >> d;
+
+	cout << -1;
 
 
 }
