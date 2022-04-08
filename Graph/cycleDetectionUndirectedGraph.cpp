@@ -12,19 +12,22 @@ using ll = long long;
 using namespace std;
 using ll = long long;
 
+// Cycle Using DFS and BFS
 
-bool bfs(int i , vector<int> &vis , vector<int> adj[])
+// BFS
+bool bfs(int i, vector<int> &vis , vector<int> adj[])
 {
 	vis[i] = 1;
 
 	queue<pair<int, int>> q;
-
 	q.push({i, -1});
 
 	while (!q.empty())
 	{
 		int node = q.front().first;
 		int par = q.front().second;
+
+		q.pop();
 
 		for (auto it : adj[node])
 		{
@@ -33,26 +36,17 @@ bool bfs(int i , vector<int> &vis , vector<int> adj[])
 				vis[it] = 1;
 				q.push({it, node});
 			}
-			else
-			{
-				if (it != par)
-				{
-					return true;
-				}
-			}
+			else if (it != par) return true;
 		}
-
 	}
 
-
-
 	return false;
+
 }
 
-bool isCycle(int n, vector<int> adj[])
-{
+bool isCycle(int n, vector<int> adj[]) {
 
-	vector<int> vis(n);
+	vector<int> vis(n, 0);
 
 	for (int i = 0 ; i < n ; i++)
 	{
@@ -63,8 +57,41 @@ bool isCycle(int n, vector<int> adj[])
 	}
 
 	return false;
-
 }
+
+// DFS
+
+bool dfs(int i , int par, vector<int> &vis , vector<int> adj[])
+{
+	vis[i] = 1;
+
+	for (auto it : adj[i])
+	{
+		if (!vis[it])
+		{
+			if (dfs(it, i, vis, adj)) return true;
+		}
+		else if (par != it) return true;
+	}
+
+	return false;
+}
+
+bool isCycle(int n, vector<int> adj[]) {
+
+	vector<int> vis(n, 0);
+
+	for (int i = 0 ; i < n ; i++)
+	{
+		if (!vis[i])
+		{
+			if (dfs(i, -1 , vis, adj)) return true;
+		}
+	}
+
+	return false;
+}
+
 
 int main()
 {
@@ -72,40 +99,6 @@ int main()
 	cin.tie(0);
 	cout.tie(0);
 
-	int n , m;
-	cin >> n >> m;
-
-	vector<int> adj[n + 1];
-
-
-	rep(i, m)
-	{
-		int u , v;
-		cin >> u >> v;
-
-		adj[u].push_back(v);
-		adj[v].push_back(u);
-	}
-
-	// dfs with parent
-
-	vector<pair<int, int>> dfs_ans;
-
-	vector<int> vis(n);
-
-	for (int i = 0 ; i < n ; i++)
-	{
-		int par = -1;
-		if (!vis[i])
-		{
-			dfs(i , par, dfs_ans , vis , adj);
-		}
-	}
-
-	for (auto it : dfs_ans)
-	{
-		cout << it.first << " " << it.second << endl;
-	}
 
 
 
