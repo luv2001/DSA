@@ -25,6 +25,44 @@ struct TreeNode
 
 };
 
+int f(int i , int j , vector<vector<int>> &matrix , int n , int m)
+{
+	if ( i == 0  )return matrix[i][j];
+	if (j < 0 || j >= m ) return -1e8;
+
+	else
+	{
+		int tL = -1e8;
+		int t = -1e8;
+		int tR = -1e8;
+
+		tL = matrix[i][j] + f(i - 1 , j - 1 , matrix , n , m);
+		t = matrix[i][j] + f(i  - 1 , j  , matrix , n , m);
+		tR = matrix[i][j] + f(i - 1 , j + 1 , matrix , n , m);
+
+		return max(max(tL , t) , tR);
+
+	}
+
+}
+
+int getMaxPathSum(vector<vector<int>> &matrix )
+{
+	int n = matrix.size();
+	int m = matrix[0].size();
+
+	int ans = INT_MIN;
+
+	return f(n - 1 , 0 , matrix , n , m);
+
+}
+
+// 5 5
+// -9999 -9888 -9777 -9666 -9555
+// 1 10 2 4 5
+// -9999 -9888 -9777 -9666 -9555
+// 0 0 0 0 0
+// -99 -98 -97 -96 -95
 
 
 int main()
@@ -33,9 +71,11 @@ int main()
 	cin.tie(0);
 	cout.tie(0);
 
-	long long l = 3;
-	l = LONG_MAX;
-	cout << l << endl;
+
+
+
+	vector<vector<int>> mat = {{ -9999, -9888 , -9777, -9666, -9555} , {1, 10, 2, 4, 5} , { -9999, -9888, -9777, -9666 , -9555} , {0, 0, 0, 0, 0} , { -99, -98, -97, -96, -95}};
+	cout << getMaxPathSum(mat);
 
 
 
